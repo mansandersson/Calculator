@@ -42,12 +42,24 @@ namespace Calculator.Operands
         {
             try
             {
-                // b - a
-                Operand a = operands.Pop();
-                Operand b = operands.Pop();
-                Operand c = new Operand(b.Value - a.Value);
-                operands.Push(c);
-                return true;
+                if (operands.Count == 1)
+                {
+                    // 0 - a
+                    Operand a = operands.Pop();
+                    Operand b = new Operand(0 - a.Value);
+                    operands.Push(b);
+                    return true;
+                }
+                else if (operands.Count > 1)
+                {
+                    // b - a
+                    Operand a = operands.Pop();
+                    Operand b = operands.Pop();
+                    Operand c = new Operand(b.Value - a.Value);
+                    operands.Push(c);
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {
