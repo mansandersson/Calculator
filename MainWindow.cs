@@ -27,15 +27,15 @@ namespace Calculator
         /// <summary>
         /// Window size (only textbox visible)
         /// </summary>
-        private Size NullSize = new Size(467, 76);
+        private Size NullSize = new Size(467, 50);
         /// <summary>
         /// Window size (textbox + decimal value visible)
         /// </summary>
-        private Size HalfSize = new Size(467, 110);
+        private Size HalfSize = new Size(467, 83);
         /// <summary>
         /// Window size (textbox + decimal, hex, binary value visible)
         /// </summary>
-        private Size FullSize = new Size(467, 186);
+        private Size FullSize = new Size(467, 150);
 
         /// <summary>
         /// Constructor, init form
@@ -51,7 +51,7 @@ namespace Calculator
         /// </summary>
         private void ClearLabels()
         {
-            this.Size = NullSize;
+            this.ClientSize = NullSize;
             txtInput.BackColor = Color.Silver;
             lblResultDecimal.Text = "";
             lblResultHex.Text = "";
@@ -93,11 +93,11 @@ namespace Calculator
 
                     lblResultBits.Text = "0b" + Convert.ToString(intResult, 2);
 
-                    this.Size = FullSize;
+                    this.ClientSize = FullSize;
                 }
                 else
                 {
-                    this.Size = HalfSize;
+                    this.ClientSize = HalfSize;
                 }
             }
             else
