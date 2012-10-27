@@ -64,7 +64,7 @@ namespace Calculator
             Queue<Op> outputQueue = new Queue<Op>();
 
             // Let's split the input string into a token list
-            List<String> tokenList = Regex.Split(_input, @"( AND | OR | XOR |[\+\-\*\(\)\/\ ])").Select(t => t.Trim()).Where(t => !String.IsNullOrEmpty(t)).ToList();
+            List<String> tokenList = Regex.Split(_input, @"( AND | OR | XOR | NOT |[\+\-\*\^\(\)\/\ ])").Select(t => t.Trim()).Where(t => !String.IsNullOrEmpty(t)).ToList();
             for (int tokenNum = 0; tokenNum < tokenList.Count(); ++tokenNum)
             {
                 double? tmpValue;
@@ -99,6 +99,9 @@ namespace Calculator
                             case "/":
                                 newOperator = new Div();
                                 break;
+                            case "^":
+                                newOperator = new Exponent();
+                                break;
                             case "AND":
                                 newOperator = new And();
                                 break;
@@ -107,6 +110,9 @@ namespace Calculator
                                 break;
                             case "XOR":
                                 newOperator = new Xor();
+                                break;
+                            case "NOT":
+                                newOperator = new Not();
                                 break;
                             default:
                                 throw new ArgumentException("Unknown operator " + token);
@@ -217,9 +223,11 @@ namespace Calculator
                      token == "-" ||
                      token == "*" ||
                      token == "/" ||
+                     token == "^" ||
                      token == "AND" ||
                      token == "OR" ||
-                     token == "XOR")
+                     token == "XOR" ||
+                     token == "NOT")
             {
                 return TokenType.Operator;
             }

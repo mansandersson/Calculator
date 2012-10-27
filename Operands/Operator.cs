@@ -34,6 +34,10 @@ namespace Calculator.Operands
         /// Bitwise (e.g. and, xor) precedence factor
         /// </summary>
         Bitwise = 3,
+        /// <summary>
+        /// Exponential calculations precedence factor
+        /// </summary>
+        Exponent = 4,
     }
 
     /// <summary>
