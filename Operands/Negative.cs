@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright (c) 2011, Måns Andersson <mail@mansandersson.se>
+    Copyright (c) 2012, Måns Andersson <mail@mansandersson.se>
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose with or without fee is hereby granted, provided that the above
@@ -23,12 +23,12 @@ namespace Calculator.Operands
     /// <summary>
     /// Minus operator class
     /// </summary>
-    public class Minus : Operator
+    public class Negative : Operator
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public Minus()
+        public Negative()
         {
             this.Precedence = Precedences.PlusMinus;
         }
@@ -42,11 +42,10 @@ namespace Calculator.Operands
         {
             try
             {
-                    // b - a
+                    // 0 - a
                     Operand a = operands.Pop();
-                    Operand b = operands.Pop();
-                    Operand c = new Operand(b.Value - a.Value);
-                    operands.Push(c);
+                    Operand b = new Operand(0 - a.Value);
+                    operands.Push(b);
                     return true;
             }
             catch (Exception)

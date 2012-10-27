@@ -51,33 +51,33 @@
             // lblResultDecimal
             // 
             this.lblResultDecimal.AutoSize = true;
-            this.lblResultDecimal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultDecimal.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultDecimal.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.lblResultDecimal.Location = new System.Drawing.Point(30, 53);
             this.lblResultDecimal.Name = "lblResultDecimal";
-            this.lblResultDecimal.Size = new System.Drawing.Size(19, 20);
+            this.lblResultDecimal.Size = new System.Drawing.Size(19, 16);
             this.lblResultDecimal.TabIndex = 2;
             this.lblResultDecimal.Text = "0";
             // 
             // lblResultHex
             // 
             this.lblResultHex.AutoSize = true;
-            this.lblResultHex.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultHex.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultHex.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.lblResultHex.Location = new System.Drawing.Point(30, 87);
             this.lblResultHex.Name = "lblResultHex";
-            this.lblResultHex.Size = new System.Drawing.Size(19, 20);
+            this.lblResultHex.Size = new System.Drawing.Size(19, 16);
             this.lblResultHex.TabIndex = 3;
             this.lblResultHex.Text = "0";
             // 
             // lblResultBits
             // 
             this.lblResultBits.AutoSize = true;
-            this.lblResultBits.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultBits.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultBits.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.lblResultBits.Location = new System.Drawing.Point(30, 123);
             this.lblResultBits.Name = "lblResultBits";
-            this.lblResultBits.Size = new System.Drawing.Size(19, 20);
+            this.lblResultBits.Size = new System.Drawing.Size(19, 16);
             this.lblResultBits.TabIndex = 4;
             this.lblResultBits.Text = "0";
             // 

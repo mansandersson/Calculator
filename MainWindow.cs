@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright (c) 2011, Måns Andersson <mail@mansandersson.se>
+    Copyright (c) 2011-2012, Måns Andersson <mail@mansandersson.se>
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose with or without fee is hereby granted, provided that the above
@@ -52,6 +52,7 @@ namespace Calculator
         private void ClearLabels()
         {
             this.Size = NullSize;
+            txtInput.BackColor = Color.Silver;
             lblResultDecimal.Text = "";
             lblResultHex.Text = "";
             lblResultBits.Text = "";
@@ -65,9 +66,19 @@ namespace Calculator
         private void txtInput_TextChanged(object sender, EventArgs e)
         {
             ClearLabels();
-            
+            if (String.IsNullOrWhiteSpace(txtInput.Text))
+                return;
+
             Calculator calc = new Calculator(txtInput.Text);
-            double? result = calc.Calculate();
+            double? result = null;
+            try
+            {
+                result = calc.Calculate();
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
 
             if (result.HasValue)
             {
@@ -88,6 +99,10 @@ namespace Calculator
                 {
                     this.Size = HalfSize;
                 }
+            }
+            else
+            {
+                txtInput.BackColor = Color.Salmon;
             }
         }
     }

@@ -42,20 +42,11 @@ namespace Calculator.Operands
         {
             try
             {
-                if (operands.Count == 1)
-                {
-                    // 0 + a
-                    return true;
-                }
-                else if (operands.Count > 1)
-                {
-                    Operand a = operands.Pop();
-                    Operand b = operands.Pop();
-                    Operand c = new Operand(a.Value + b.Value);
-                    operands.Push(c);
-                    return true;
-                }
-                return false;
+                Operand a = operands.Pop();
+                Operand b = operands.Pop();
+                Operand c = new Operand(a.Value + b.Value);
+                operands.Push(c);
+                return true;
             }
             catch (Exception)
             {

@@ -72,6 +72,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Operands\And.cs" />
+    <Compile Include="Operands\Negative.cs" />
     <Compile Include="Operands\Xor.cs" />
     <Compile Include="Operands\Not.cs" />
     <Compile Include="Operands\Or.cs" />

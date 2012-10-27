@@ -31,44 +31,9 @@ namespace Calculator.Operands
         /// Constructor, initalize value from string
         /// </summary>
         /// <param name="value">string value, hex, binary or decimal</param>
-        public Operand(string value)
+        public Operand(String value)
         {
-            bool isParsed = false;
-            if (value.Length > 2)
-            {
-                try
-                {
-                    string prefix = value.Substring(0, 2);
-                    if (prefix.CompareTo("0x") == 0 && value.Length > 2)
-                    {
-                        Value = (double)Convert.ToInt32(value, 16);
-                        isParsed = true;
-                    }
-                    else if (prefix.CompareTo("0b") == 0 && value.Length > 2)
-                    {
-                        Value = (double)Convert.ToInt32(value.Substring(2), 2);
-                        isParsed = true;
-                    }
-                }
-                catch (Exception)
-                {
-                    // We couldn't parse string, even though we tried
-                    isParsed = false;
-                }
-            }
-
-            if (!isParsed)
-            {
-                double v = 0;
-                if (Double.TryParse(value, out v))
-                {
-                    Value = v;
-                }
-                else
-                {
-                    Value = 0;
-                }
-            }
+            Value = ParseValue(value) ?? 0;
         }
 
         /// <summary>
@@ -78,6 +43,45 @@ namespace Calculator.Operands
         public Operand(double value)
         {
             Value = value;
+        }
+
+        /// <summary>
+        /// This parses a token as a value (hex, bit and decimal strings supported)
+        /// </summary>
+        /// <param name="token">token to parse</param>
+        /// <returns>value received after parsing, null if we couldn't parse value</returns>
+        public static double? ParseValue(String token)
+        {
+            double? returnValue = null;
+            if (token.Length > 2)
+            {
+                try
+                {
+                    string prefix = token.Substring(0, 2);
+                    if (prefix.CompareTo("0x") == 0 && token.Length > 2)
+                    {
+                        returnValue = (double)Convert.ToInt32(token, 16);
+                    }
+                    else if (prefix.CompareTo("0b") == 0 && token.Length > 2)
+                    {
+                        returnValue = (double)Convert.ToInt32(token.Substring(2), 2);
+                    }
+                }
+                catch (Exception)
+                {
+                    // We couldn't parse string, even though we tried
+                }
+            }
+
+            if (!returnValue.HasValue)
+            {
+                double v = 0;
+                if (Double.TryParse(token, out v))
+                {
+                    returnValue = v;
+                }
+            }
+            return returnValue;
         }
     }
 }
