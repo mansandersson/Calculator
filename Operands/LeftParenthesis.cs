@@ -36,8 +36,9 @@ namespace Calculator.Operands
         /// Execute left parenthesis operand (do nothing)
         /// </summary>
         /// <param name="operands">stack of operands</param>
+        /// <param name="mode">mode to operate in</param>
         /// <returns>true/false if execution went well (always true)</returns>
-        public override bool Execute(Stack<Operand> operands)
+        public override bool Execute(Stack<Operand> operands, CalculatorMode mode)
         {
             try
             {

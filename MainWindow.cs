@@ -38,12 +38,18 @@ namespace Calculator
         private Size FullSize = new Size(467, 150);
 
         /// <summary>
+        /// Operational mode for expression evaluation
+        /// </summary>
+        private CalculatorMode Mode { get; set; }
+
+        /// <summary>
         /// Constructor, init form
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             ClearLabels();
+            this.Mode = CalculatorMode.Mathematics;
         }
 
         /// <summary>
@@ -56,6 +62,17 @@ namespace Calculator
             lblResultDecimal.Text = "";
             lblResultHex.Text = "";
             lblResultBits.Text = "";
+
+            switch (this.Mode)
+            {
+                default:
+                case CalculatorMode.Mathematics:
+                    lblMode.Text = "Mathematics Mode";
+                    break;
+                case CalculatorMode.Programming:
+                    lblMode.Text = "Programming Mode";
+                    break;
+            }
         }
 
         /// <summary>
@@ -70,6 +87,7 @@ namespace Calculator
                 return;
 
             Calculator calc = new Calculator(txtInput.Text);
+            calc.Mode = this.Mode;
             double? result = null;
             try
             {
@@ -103,6 +121,34 @@ namespace Calculator
             else
             {
                 txtInput.BackColor = Color.Salmon;
+            }
+        }
+
+        /// <summary>
+        /// Handle input of commands
+        /// </summary>
+        /// <param name="sender">calling object</param>
+        /// <param name="e">event arguments</param>
+        private void txtInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            {
+                bool handled = false;
+                switch (txtInput.Text)
+                {
+                    // Set to mathematics mode
+                    case "m":
+                        this.Mode = CalculatorMode.Mathematics;
+                        handled = true;
+                        break;
+                    // Set to programming mode
+                    case "p":
+                        this.Mode = CalculatorMode.Programming;
+                        handled = true;
+                        break;
+                }
+                if (handled)
+                    txtInput.Clear();
             }
         }
     }

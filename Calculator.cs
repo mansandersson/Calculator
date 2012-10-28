@@ -22,6 +22,17 @@ using System.Text.RegularExpressions;
 namespace Calculator
 {
     /// <summary>
+    /// Modes to operate calculator in
+    /// </summary>
+    public enum CalculatorMode
+    {
+        /// <summary>Mathematics mode of calculator (XOR=XOR, AND=AND and so on, all division is floating point)</summary>
+        Mathematics,
+        /// <summary>Programming mode of calculator (XOR=^, AND=& and so on, all division is treated like in programming (e.g. int/int gives int)</summary>
+        Programming,
+    }
+
+    /// <summary>
     /// Calculator execution class
     /// </summary>
     public class Calculator
@@ -43,12 +54,35 @@ namespace Calculator
         private string _input = null;
 
         /// <summary>
+        /// Regular expression used for splitting the expression into tokens
+        /// </summary>
+        public string TokenSplitRegex
+        {
+            get
+            {
+                switch (Mode)
+                {
+                    default:
+                    case CalculatorMode.Mathematics:
+                        return @"( AND | OR | XOR | NOT |[\+\-\*\^\(\)\/\ ])";
+                    case CalculatorMode.Programming:
+                        return @"([\+\-\*\&\|\^\(\)\/\ ])";
+                }
+            }
+        }
+        /// <summary>
+        /// Current mode to operate after
+        /// </summary>
+        public CalculatorMode Mode { get; set; }
+
+        /// <summary>
         /// Constructor, initalize expression
         /// </summary>
         /// <param name="input">expression to evaluate with calculator</param>
         public Calculator(string input)
         {
             _input = input;
+            Mode = CalculatorMode.Mathematics;
         }
 
         /// <summary>
@@ -64,7 +98,7 @@ namespace Calculator
             Queue<Op> outputQueue = new Queue<Op>();
 
             // Let's split the input string into a token list
-            List<String> tokenList = Regex.Split(_input, @"( AND | OR | XOR | NOT |[\+\-\*\^\(\)\/\ ])").Select(t => t.Trim()).Where(t => !String.IsNullOrEmpty(t)).ToList();
+            List<String> tokenList = Regex.Split(_input, TokenSplitRegex).Select(t => t.Trim()).Where(t => !String.IsNullOrEmpty(t)).ToList();
             for (int tokenNum = 0; tokenNum < tokenList.Count(); ++tokenNum)
             {
                 double? tmpValue;
@@ -81,42 +115,7 @@ namespace Calculator
                             throw new ArgumentException("Unknown operand " + token);
                         break;
                     case TokenType.Operator:
-                        Operator newOperator = null;
-                        switch (token)
-                        {
-                            case "+":
-                                newOperator = new Plus();
-                                break;
-                            case "-":
-                                if (tokenNum == 0 || tokenList[tokenNum - 1] == "(")
-                                    newOperator = new Negative();
-                                else
-                                    newOperator = new Minus();
-                                break;
-                            case "*":
-                                newOperator = new Multiplication();
-                                break;
-                            case "/":
-                                newOperator = new Div();
-                                break;
-                            case "^":
-                                newOperator = new Exponent();
-                                break;
-                            case "AND":
-                                newOperator = new And();
-                                break;
-                            case "OR":
-                                newOperator = new Or();
-                                break;
-                            case "XOR":
-                                newOperator = new Xor();
-                                break;
-                            case "NOT":
-                                newOperator = new Not();
-                                break;
-                            default:
-                                throw new ArgumentException("Unknown operator " + token);
-                        }
+                        Operator newOperator = GetOperator(token, (tokenNum == 0 || tokenList[tokenNum - 1] == "("));
                         if (operatorStack.Count > 0)
                         {
                             Op topOperator = operatorStack.Peek();
@@ -186,7 +185,7 @@ namespace Calculator
                 else if (currentOp is Operator)
                 {
                     Operator currentOperator = (Operator)currentOp;
-                    currentOperator.Execute(outputStack);
+                    currentOperator.Execute(outputStack, this.Mode);
                 }
             }
 
@@ -205,7 +204,7 @@ namespace Calculator
         /// </summary>
         /// <param name="token">token to check</param>
         /// <returns>the token type for the token</returns>
-        private TokenType GetTokenType(String token, out double? value)
+        private TokenType GetTokenType(string token, out double? value)
         {
             if ((value = Operand.ParseValue(token)) != null)
             {
@@ -224,6 +223,8 @@ namespace Calculator
                      token == "*" ||
                      token == "/" ||
                      token == "^" ||
+                     token == "&" ||
+                     token == "|" ||
                      token == "AND" ||
                      token == "OR" ||
                      token == "XOR" ||
@@ -234,6 +235,76 @@ namespace Calculator
             else
             {
                 throw new ArgumentException("Invalid token");
+            }
+        }
+
+        /// <summary>
+        /// Get an operator object representing a token
+        /// </summary>
+        /// <param name="token">token to represent as an object</param>
+        /// <param name="isFirstToken">whether this token is the first (first in expression, or first after a new sub-expression)</param>
+        /// <returns>operator object corresponding to token</returns>
+        private Operator GetOperator(string token, bool isFirstToken)
+        {
+            if (this.Mode == CalculatorMode.Mathematics)
+            {
+                switch (token)
+                {
+                    case "+":
+                       return new Plus();
+                    case "-":
+                        if (isFirstToken)
+                            return new Negative();
+                        else
+                            return new Minus();
+                    case "*":
+                        return new Multiplication();
+                    case "/":
+                        return new Div();
+                    case "^":
+                        return new Exponent();
+                    case "AND":
+                        return new And();
+                    case "OR":
+                        return new Or();
+                    case "XOR":
+                        return new Xor();
+                    case "NOT":
+                        return new Not();
+                    default:
+                        throw new ArgumentException("Unknown operator " + token);
+                }
+            }
+            else if (this.Mode == CalculatorMode.Programming)
+            {
+                 switch (token)
+                {
+                    case "+":
+                        return new Plus();
+                    case "-":
+                        if (isFirstToken)
+                            return new Negative();
+                        else
+                            return new Minus();
+                    case "*":
+                        return new Multiplication();
+                    case "/":
+                        return new Div();
+                    case "&":
+                        return new And();
+                    case "|":
+                        return new Or();
+                    case "^":
+                        return new Xor();
+                    case "~":
+                        return new Not();
+                    default:
+                        throw new ArgumentException("Unknown operator " + token);
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Unknown calculator mode");
             }
         }
     }

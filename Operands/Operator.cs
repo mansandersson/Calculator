@@ -54,7 +54,8 @@ namespace Calculator.Operands
         /// Execute operator
         /// </summary>
         /// <param name="operands">stack of operands to execute on</param>
+        /// <param name="mode">mode to operate in</param>
         /// <returns>true / false if succeeded</returns>
-        public abstract bool Execute(Stack<Operand> operands);
+        public abstract bool Execute(Stack<Operand> operands, CalculatorMode mode);
     }
 }

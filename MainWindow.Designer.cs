@@ -33,12 +33,13 @@
             this.lblResultDecimal = new System.Windows.Forms.Label();
             this.lblResultHex = new System.Windows.Forms.Label();
             this.lblResultBits = new System.Windows.Forms.Label();
+            this.lblMode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtInput
             // 
-            this.txtInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtInput.BackColor = System.Drawing.Color.Silver;
             this.txtInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -47,6 +48,7 @@
             this.txtInput.Size = new System.Drawing.Size(443, 26);
             this.txtInput.TabIndex = 0;
             this.txtInput.TextChanged += new System.EventHandler(this.txtInput_TextChanged);
+            this.txtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyDown);
             // 
             // lblResultDecimal
             // 
@@ -81,12 +83,25 @@
             this.lblResultBits.TabIndex = 4;
             this.lblResultBits.Text = "0";
             // 
+            // lblMode
+            // 
+            this.lblMode.AutoSize = true;
+            this.lblMode.BackColor = System.Drawing.Color.Transparent;
+            this.lblMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMode.Location = new System.Drawing.Point(382, 4);
+            this.lblMode.Name = "lblMode";
+            this.lblMode.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblMode.Size = new System.Drawing.Size(70, 9);
+            this.lblMode.TabIndex = 5;
+            this.lblMode.Text = "Mathematics Mode";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.ClientSize = new System.Drawing.Size(467, 161);
+            this.Controls.Add(this.lblMode);
             this.Controls.Add(this.lblResultBits);
             this.Controls.Add(this.lblResultHex);
             this.Controls.Add(this.lblResultDecimal);
@@ -108,6 +123,7 @@
         private System.Windows.Forms.Label lblResultDecimal;
         private System.Windows.Forms.Label lblResultHex;
         private System.Windows.Forms.Label lblResultBits;
+        private System.Windows.Forms.Label lblMode;
     }
 }
 
