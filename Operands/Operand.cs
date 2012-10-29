@@ -24,7 +24,7 @@ namespace Calculator.Operands
     /// </summary>
     public class Operand : Op
     {
-		/// <summary>
+        /// <summary>
         /// Value of operand
         /// </summary>
         public double Value { get; set; }
@@ -35,7 +35,7 @@ namespace Calculator.Operands
         /// <param name="value">string value, hex, binary or decimal</param>
         public Operand(String value)
         {
-			Value = ParseValue(value) ?? 0;
+            Value = ParseValue(value) ?? 0;
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Calculator.Operands
         /// <param name="value">double value</param>
         public Operand(double value)
         {
-			Value = value;
-		}
+            Value = value;
+        }
 
         /// <summary>
         /// This parses a token as a value (hex, bit and decimal strings supported)
@@ -54,7 +54,7 @@ namespace Calculator.Operands
         /// <returns>value received after parsing, null if we couldn't parse value</returns>
         public static double? ParseValue(String token)
         {
-			Constants.Constants c = new Constants.Constants();
+            Constants.Constants c = new Constants.Constants();
             double? returnValue = null;
             if (token.Length > 2)
             {
@@ -75,13 +75,11 @@ namespace Calculator.Operands
                     // We couldn't parse string, even though we tried
                 }
             }
-			
-			
-			if (!returnValue.HasValue)
-			{
-				c.TryGetValue(token, out returnValue);
-					
-			}
+
+            if (!returnValue.HasValue)
+            {
+                c.TryGetValue(token, out returnValue);
+            }
             if (!returnValue.HasValue)
             {
                 double v = 0;
