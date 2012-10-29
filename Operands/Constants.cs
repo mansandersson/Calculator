@@ -27,7 +27,7 @@ namespace Calculator.Operands.Constants
         /// <returns>True if constant was found, else False</returns>
 		public bool TryGetValue(string Key, out double? RetVal)
 		{
-			return this.ConstantDict.TryGetValue(Key, out RetVal);
+			return this.ConstantDict.TryGetValue(Key.ToLower(), out RetVal);
 		}
 	}
 }
