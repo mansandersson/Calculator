@@ -14,9 +14,9 @@ namespace Calculator.Operands.Constants
         public Constants()
         {
             this.ConstantDict = new Dictionary<string, double?>();
-            ConstantDict.Add("pi", 3.141592653589793);
-            ConstantDict.Add("e", 2.718281828);
-            ConstantDict.Add("phi", 1.61803398874);
+            this.ConstantDict.Add("pi", 3.141592653589793); // Pi
+            this.ConstantDict.Add("e", 2.718281828);        // Natural Logarithm
+            this.ConstantDict.Add("phi", 1.61803398874);    // The Golden Ratio
         }
         /// <summary>
         /// checks if a string is declared in the the dictionary of constants
