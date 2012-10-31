@@ -24,6 +24,7 @@ namespace Calculator.Operands
     /// </summary>
     public class Operand : Op
     {
+        private static Constants.Constants c = new Constants.Constants();
         /// <summary>
         /// Value of operand
         /// </summary>
@@ -54,7 +55,7 @@ namespace Calculator.Operands
         /// <returns>value received after parsing, null if we couldn't parse value</returns>
         public static double? ParseValue(String token)
         {
-            Constants.Constants c = new Constants.Constants();
+
             double? returnValue = null;
             if (token.Length > 2)
             {
