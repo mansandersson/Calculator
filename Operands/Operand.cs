@@ -15,6 +15,7 @@
 */
 using System;
 
+
 namespace Calculator.Operands
 {
     /// <summary>
@@ -22,6 +23,7 @@ namespace Calculator.Operands
     /// </summary>
     public class Operand : Op
     {
+        private static Constants c = new Constants();
         /// <summary>
         /// Value of operand
         /// </summary>
@@ -52,6 +54,7 @@ namespace Calculator.Operands
         /// <returns>value received after parsing, null if we couldn't parse value</returns>
         public static double? ParseValue(String token)
         {
+
             double? returnValue = null;
             if (token.Length > 2)
             {
@@ -73,6 +76,10 @@ namespace Calculator.Operands
                 }
             }
 
+            if (!returnValue.HasValue)
+            {
+                c.TryGetValue(token, out returnValue);
+            }
             if (!returnValue.HasValue)
             {
                 double v = 0;
