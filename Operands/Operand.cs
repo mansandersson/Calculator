@@ -14,7 +14,6 @@
     OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 using System;
-using Calculator.Operands.Constants;
 
 
 namespace Calculator.Operands
@@ -24,7 +23,7 @@ namespace Calculator.Operands
     /// </summary>
     public class Operand : Op
     {
-        private static Constants.Constants c = new Constants.Constants();
+        private static Constants c = new Constants();
         /// <summary>
         /// Value of operand
         /// </summary>
