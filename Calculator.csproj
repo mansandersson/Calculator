@@ -112,6 +112,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="README.md" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="blackboard.ico" />
