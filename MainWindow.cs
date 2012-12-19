@@ -67,10 +67,12 @@ namespace Calculator
             {
                 default:
                 case CalculatorMode.Mathematics:
-                    lblMode.Text = "Mathematics Mode";
+                    lblMode.Text = "M";
+                    lblMode.BackColor = Color.Green;
                     break;
                 case CalculatorMode.Programming:
-                    lblMode.Text = "Programming Mode";
+                    lblMode.Text = "P";
+                    lblMode.BackColor = Color.RoyalBlue;
                     break;
             }
         }

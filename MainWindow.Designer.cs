@@ -45,7 +45,7 @@
             this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInput.Location = new System.Drawing.Point(12, 12);
             this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(443, 26);
+            this.txtInput.Size = new System.Drawing.Size(418, 26);
             this.txtInput.TabIndex = 0;
             this.txtInput.TextChanged += new System.EventHandler(this.txtInput_TextChanged);
             this.txtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyDown);
@@ -85,15 +85,14 @@
             // 
             // lblMode
             // 
-            this.lblMode.AutoSize = true;
-            this.lblMode.BackColor = System.Drawing.Color.Transparent;
-            this.lblMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMode.Location = new System.Drawing.Point(382, 4);
+            this.lblMode.BackColor = System.Drawing.Color.Green;
+            this.lblMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMode.Location = new System.Drawing.Point(427, 13);
             this.lblMode.Name = "lblMode";
-            this.lblMode.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblMode.Size = new System.Drawing.Size(70, 9);
-            this.lblMode.TabIndex = 5;
-            this.lblMode.Text = "Mathematics Mode";
+            this.lblMode.Size = new System.Drawing.Size(24, 24);
+            this.lblMode.TabIndex = 6;
+            this.lblMode.Text = "M";
+            this.lblMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainWindow
             // 
