@@ -50,6 +50,8 @@ namespace Calculator
             RightParenthesis,
             /// <summary>Value</summary>
             Value,
+            /// <summary>Function</summary>
+            Function,
         }
         private string _input = null;
 
@@ -141,6 +143,17 @@ namespace Calculator
                         }
                         operatorStack.Pop();
                         break;
+                    case TokenType.Function:
+                        if ((tokenList.Count >= tokenNum + 1) && (tokenList[tokenNum + 1] == "("))
+                        {
+                            Function.FunctionTypes type = Function.GetFunctionType(token);
+                            if (type == Function.FunctionTypes.UNKNOWN)
+                            {
+                                throw new ArgumentException("Unknown function " + token);
+                            }
+                            operatorStack.Push(new Function(type));
+                        }
+                        break;
                 }
 
                 // If we don't find any token between a value and parenthesis, automatically
@@ -231,6 +244,10 @@ namespace Calculator
                      token == "NOT")
             {
                 return TokenType.Operator;
+            }
+            else if (Regex.IsMatch(token, @"^[0-9A-Za-z]+$"))
+            {
+                return TokenType.Function;
             }
             else
             {

@@ -38,6 +38,10 @@ namespace Calculator.Operands
         /// Exponential calculations precedence factor
         /// </summary>
         Exponent = 4,
+        /// <summary>
+        /// Function calculations precedence factor
+        /// </summary>
+        Function = 5,
     }
 
     /// <summary>
