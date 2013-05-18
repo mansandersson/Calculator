@@ -153,5 +153,12 @@ namespace Calculator
                     txtInput.Clear();
             }
         }
+
+        private void AdjustResultBoxToSizes(object sender, EventArgs e)
+        {
+            lblResultDecimal.Width = (int)Math.Abs((lblResultDecimal.Text.Length) * (lblResultDecimal.Font.Size+1));
+            lblResultBits.Width = (int)Math.Abs((lblResultBits.Text.Length) * (lblResultBits.Font.Size+1));
+            lblResultHex.Width = (int)Math.Abs((lblResultHex.Text.Length) * (lblResultHex.Font.Size+1));
+        }
     }
 }
