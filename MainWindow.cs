@@ -59,9 +59,9 @@ namespace Calculator
         {
             this.ClientSize = NullSize;
             txtInput.BackColor = Color.Silver;
-            lblResultDecimal.Text = "";
-            lblResultHex.Text = "";
-            lblResultBits.Text = "";
+            txtResultDecimal.Text = "";
+            txtResultHex.Text = "";
+            txtResultBits.Text = "";
 
             switch (this.Mode)
             {
@@ -104,14 +104,14 @@ namespace Calculator
             {
                 Int64 intResult = (Int64)result;
 
-                lblResultDecimal.Text = result.ToString();
+                txtResultDecimal.Text = result.ToString();
 
                 if (result == ((double)intResult))
                 {
                     // This is a whole number
-                    lblResultHex.Text = "0x" + intResult.ToString("X");
+                    txtResultHex.Text = "0x" + intResult.ToString("X");
 
-                    lblResultBits.Text = "0b" + Convert.ToString(intResult, 2);
+                    txtResultBits.Text = "0b" + Convert.ToString(intResult, 2);
 
                     this.ClientSize = FullSize;
                 }
@@ -156,9 +156,9 @@ namespace Calculator
 
         private void AdjustResultBoxToSizes(object sender, EventArgs e)
         {
-            lblResultDecimal.Width = (int)Math.Abs((lblResultDecimal.Text.Length) * (lblResultDecimal.Font.Size+1));
-            lblResultBits.Width = (int)Math.Abs((lblResultBits.Text.Length) * (lblResultBits.Font.Size+1));
-            lblResultHex.Width = (int)Math.Abs((lblResultHex.Text.Length) * (lblResultHex.Font.Size+1));
+            txtResultDecimal.Width = (int)Math.Abs((txtResultDecimal.Text.Length) * (txtResultDecimal.Font.Size+1));
+            txtResultBits.Width = (int)Math.Abs((txtResultBits.Text.Length) * (txtResultBits.Font.Size+1));
+            txtResultHex.Width = (int)Math.Abs((txtResultHex.Text.Length) * (txtResultHex.Font.Size+1));
         }
     }
 }
