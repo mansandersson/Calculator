@@ -15,6 +15,7 @@
 */
 using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Calculator
@@ -36,6 +37,14 @@ namespace Calculator
         /// Window size (textbox + decimal, hex, binary value visible)
         /// </summary>
         private Size FullSize = new Size(467, 150);
+        /// <summary>
+        /// Window size (textbox + decimal, hex, binary (2 lines) value visible)
+        /// </summary>
+        private Size FullSizeTwoBinaryLines = new Size(467, 175);
+        /// <summary>
+        /// Window size (textbox + decimal, hex, binary (3 lines) value visible)
+        /// </summary>
+        private Size FullSizeThreeBinaryLines = new Size(467, 200);
 
         /// <summary>
         /// Operational mode for expression evaluation
@@ -109,11 +118,16 @@ namespace Calculator
                 if (result == ((double)intResult))
                 {
                     // This is a whole number
-                    txtResultHex.Text = "0x" + intResult.ToString("X");
+                    txtResultHex.Text = String.Join(" ", Regex.Split(intResult.ToString("X"), "(?<=^(.{4})+)"));
 
-                    txtResultBits.Text = "0b" + Convert.ToString(intResult, 2);
+                    txtResultBits.Text = String.Join(" ", Regex.Split(Convert.ToString(intResult, 2), "(?<=^(.{4})+)"));
 
-                    this.ClientSize = FullSize;
+                    if (txtResultBits.Text.Length > 100)
+                        this.ClientSize = FullSizeThreeBinaryLines;
+                    else if (txtResultBits.Text.Length > 50)
+                        this.ClientSize = FullSizeTwoBinaryLines;
+                    else
+                        this.ClientSize = FullSize;
                 }
                 else
                 {
@@ -157,7 +171,7 @@ namespace Calculator
         private void AdjustResultBoxToSizes(object sender, EventArgs e)
         {
             txtResultDecimal.Width = (int)Math.Abs((txtResultDecimal.Text.Length) * (txtResultDecimal.Font.Size+1));
-            txtResultBits.Width = (int)Math.Abs((txtResultBits.Text.Length) * (txtResultBits.Font.Size+1));
+            //txtResultBits.Width = (int)Math.Abs((txtResultBits.Text.Length) * (txtResultBits.Font.Size+1));
             txtResultHex.Width = (int)Math.Abs((txtResultHex.Text.Length) * (txtResultHex.Font.Size+1));
         }
     }
