@@ -174,5 +174,51 @@ namespace Calculator
             //txtResultBits.Width = (int)Math.Abs((txtResultBits.Text.Length) * (txtResultBits.Font.Size+1));
             txtResultHex.Width = (int)Math.Abs((txtResultHex.Text.Length) * (txtResultHex.Font.Size+1));
         }
+
+        /// <summary>
+        /// Handle event when mouse is moved on top of the bits textbox and present a tooltip of the hovered value
+        /// </summary>
+        /// <param name="sender">calling object</param>
+        /// <param name="e">event arguments</param>
+        private void txtResultBits_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!timer_bitTooltip.Enabled)
+            {
+                Int32? bit = txtResultBits.GetBit(e.Location, 4);
+                if (bit.HasValue)
+                {
+                    tooltip.ToolTipTitle = String.Format("Bit {0}", bit.Value);
+                    Point p = txtResultBits.Location;
+                    tooltip.Show(String.Format("1<<{0}={1}", bit.Value, 1<<bit.Value), this, p.X + e.X, p.Y + e.Y + 32);
+
+                    timer_bitTooltip.Interval = 50;
+                    timer_bitTooltip.Enabled = true;
+                }
+                else
+                {
+                    tooltip.Hide(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handle event when mouse is mouved off from the bits textbox, hiding the tooltip
+        /// </summary>
+        /// <param name="sender">calling object</param>
+        /// <param name="e">event arguments</param>
+        private void txtResultBits_MouseLeave(object sender, EventArgs e)
+        {
+            tooltip.Hide(this);
+        }
+
+        /// <summary>
+        /// Handle fire event on tooltip timer. The tooltip timer prevents the tooltip from redrawing too often
+        /// </summary>
+        /// <param name="sender">calling object</param>
+        /// <param name="e">event arguments</param>
+        private void timer_bitTooltip_Tick(object sender, EventArgs e)
+        {
+            timer_bitTooltip.Enabled = false;
+        }
     }
 }
