@@ -120,7 +120,7 @@ namespace Calculator
                     // This is a whole number
                     txtResultHex.Text = String.Join(" ", Regex.Split(intResult.ToString("X"), "(?<=^(.{4})+)"));
 
-                    txtResultBits.Text = String.Join(" ", Regex.Split(Convert.ToString(intResult, 2), "(?<=^(.{4})+)"));
+                    txtResultBits.Text = String.Join(" ", Regex.Split(Convert.ToString(intResult, 2).Reverse(), "(?<=^(.{4})+)")).Reverse();
 
                     if (txtResultBits.Text.Length > 100)
                         this.ClientSize = FullSizeThreeBinaryLines;
