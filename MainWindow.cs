@@ -118,7 +118,7 @@ namespace Calculator
                 if (result == ((double)intResult))
                 {
                     // This is a whole number
-                    txtResultHex.Text = String.Join(" ", Regex.Split(intResult.ToString("X"), "(?<=^(.{4})+)"));
+                    txtResultHex.Text = String.Join(" ", Regex.Split(intResult.ToString("X").Reverse(), "(?<=^(.{4})+)")).Reverse();
 
                     txtResultBits.Text = String.Join(" ", Regex.Split(Convert.ToString(intResult, 2).Reverse(), "(?<=^(.{4})+)")).Reverse();
 
