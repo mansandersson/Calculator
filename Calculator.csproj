@@ -75,6 +75,8 @@
     <Compile Include="Operands\And.cs" />
     <Compile Include="Operands\Function.cs" />
     <Compile Include="Operands\Exponent.cs" />
+    <Compile Include="Operands\RightShift.cs" />
+    <Compile Include="Operands\LeftShift.cs" />
     <Compile Include="Operands\Negative.cs" />
     <Compile Include="Operands\Xor.cs" />
     <Compile Include="Operands\Not.cs" />

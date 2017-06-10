@@ -28,6 +28,16 @@ namespace Calculator.Operands
         /// Value of operand
         /// </summary>
         public double Value { get; set; }
+        /// <summary>
+        /// Whether value is an integer value
+        /// </summary>
+        public bool IsInteger
+        {
+            get
+            {
+                return (Value == (Int64)Value);
+            }
+        }
 
         /// <summary>
         /// Constructor, initalize value from string

@@ -68,7 +68,7 @@ namespace Calculator
                     case CalculatorMode.Mathematics:
                         return @"( AND | OR | XOR | NOT |[\+\-\*\^\(\)\/\ ])";
                     case CalculatorMode.Programming:
-                        return @"([\+\-\*\&\|\^\(\)\/\ ])";
+                        return @"(<<|>>|[%\+\-\*\&\|\^\(\)\/\ ])";
                 }
             }
         }
@@ -238,6 +238,9 @@ namespace Calculator
                      token == "^" ||
                      token == "&" ||
                      token == "|" ||
+                     token == "%" ||
+                     token == "<<" ||
+                     token == ">>" ||
                      token == "AND" ||
                      token == "OR" ||
                      token == "XOR" ||
@@ -307,6 +310,12 @@ namespace Calculator
                         return new Multiplication();
                     case "/":
                         return new Div();
+                    case "<<":
+                        return new LeftShift();
+                    case ">>":
+                        return new RightShift();
+                    case "%":
+                        return new Modulus();
                     case "&":
                         return new And();
                     case "|":

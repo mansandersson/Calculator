@@ -1,6 +1,6 @@
 Basic windows calculator replacement for those who likes operator precedence and keyboard input.
 
-(c)opyright Måns Andersson 2011-2012
+(c)opyright Måns Andersson 2011-2017
 
 ## Value input and output
 
@@ -31,9 +31,9 @@ The calculator have two different modes built in which gives it somewhat differe
 
 Evaluates expressions as a regular calculator. You may input values both in hex, decimal and bit form. Available operators:
 
-* +
-* -
-* *
+* \+
+* \-
+* \*
 * / (floating point division)
 * ^ (exponential calculation e.g. 10^2 = 100)
 * AND (bitwise and)
@@ -45,11 +45,14 @@ Evaluates expressions as a regular calculator. You may input values both in hex,
 
 Evaluates expressions more like a programming language would, e.g. the division is integer division when both operands are integers. You may input values in both hex, decimal and bit form. Available operators:
 
-* +
-* -
-* *
+* \+
+* \-
+* \*
 * / (integer division when both operands are integers, else floating point division)
+* % (modulus)
 * & (bitwise and)
 * | (bitwise or)
 * ^ (bitwise xor)
 * ~ (bitwise not)
+* << (left shift)
+* >> (right shift)
