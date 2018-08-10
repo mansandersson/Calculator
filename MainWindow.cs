@@ -118,7 +118,7 @@ namespace Calculator
                 if (result == ((double)intResult))
                 {
                     // This is a whole number
-                    txtResultHex.Text = String.Join(" ", intResult.ToString("X").Reverse().SplitEveryNth(4)).Reverse();
+                    txtResultHex.Text = String.Join(" ", intResult.ToString("X").Reverse().SplitEveryNth(2)).Reverse();
 
                     txtResultBits.Text = String.Join(" ", Convert.ToString(intResult, 2).Reverse().SplitEveryNth(4)).Reverse();
 
