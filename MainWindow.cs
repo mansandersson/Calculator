@@ -182,21 +182,9 @@ namespace Calculator
                 string varName = txtStore.Text;
                 string varCalculation = txtInput.Text;
 
-                Calculator calc = new Calculator(txtInput.Text);
-                calc.Mode = this.Mode;
-                double? varValue = null;
-                try
-                {
-                    varValue = calc.Calculate();
-                }
-                catch (Exception)
-                {
-                    // error
-                }
-
                 if (varName.Length > 0)
                 {
-                    Variables.Instance.AddVariable(varName, varCalculation, varValue.Value);
+                    Variables.Instance.AddOrUpdateVariable(varName, varCalculation, this.Mode);
                     txtInput.Text = varName;
                 }
                 else

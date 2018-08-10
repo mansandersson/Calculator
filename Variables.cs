@@ -30,13 +30,32 @@ namespace Calculator
         private class Variable
         {
             /// <summary>
+            /// Calculator mode for calculation
+            /// </summary>
+            public CalculatorMode Mode { get; set; }
+            /// <summary>
             /// Calculation
             /// </summary>
             public string Calculation { get; set; }
             /// <summary>
             /// Value
             /// </summary>
-            public double? Value { get; set; }
+            public double? Value
+            {
+                get
+                {
+                    Calculator calc = new Calculator(Calculation); // risk for a never-ending loop due to recursion
+                    calc.Mode = Mode;
+                    try
+                    {
+                        return calc.Calculate();
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                }
+            }
         }
 
         private Dictionary<string, Variable> VariableDict;
@@ -54,23 +73,30 @@ namespace Calculator
         /// </summary>
         /// <param name="name">variable name</param>
         /// <param name="calculation">variable calculation</param>
-        /// <param name="value">value</param>
+        /// <param name="mode">calculator mode for calculation</param>
         /// <returns>True if variable was added, false if it already exists</returns>
-        public bool AddVariable(string name, string calculation, double? value)
+        public bool AddOrUpdateVariable(string name, string calculation, CalculatorMode mode)
         {
             try
             {
-                this.VariableDict.Add(name, new Variable()
+                if (!this.VariableDict.ContainsKey(name))
                 {
-                    Calculation = calculation,
-                    Value = value
-                });
-                return true;
+                    this.VariableDict.Add(name, new Variable());
+                }
+
+                Variable var;
+                if (this.VariableDict.TryGetValue(name, out var))
+                {
+                    var.Calculation = calculation;
+                    var.Mode = mode;
+                    return true;
+                }
             }
             catch
             {
-                return false;
+                // do nothing
             }
+            return false;
         }
 
         /// <summary>
