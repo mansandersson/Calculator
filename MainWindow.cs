@@ -162,9 +162,52 @@ namespace Calculator
                         this.Mode = CalculatorMode.Programming;
                         handled = true;
                         break;
+                    // Enter "save/store" mode
+                    default:
+                        txtInput.Enabled = false;
+                        txtStore.Visible = true;
+                        txtStore.Focus();
+                        break;
+
                 }
                 if (handled)
                     txtInput.Clear();
+            }
+        }
+
+        private void txtStore_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            {
+                string varName = txtStore.Text;
+                string varCalculation = txtInput.Text;
+
+                Calculator calc = new Calculator(txtInput.Text);
+                calc.Mode = this.Mode;
+                double? varValue = null;
+                try
+                {
+                    varValue = calc.Calculate();
+                }
+                catch (Exception)
+                {
+                    // error
+                }
+
+                if (varName.Length > 0)
+                {
+                    Variables.Instance.AddVariable(varName, varCalculation, varValue.Value);
+                    txtInput.Text = varName;
+                }
+                else
+                {
+                    // error...
+                }
+
+                txtInput.Enabled = true;
+                txtStore.Visible = false;
+                txtStore.Text = String.Empty;
+                txtInput.Focus();
             }
         }
 

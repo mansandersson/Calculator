@@ -92,6 +92,10 @@ namespace Calculator.Operands
             }
             if (!returnValue.HasValue)
             {
+                Variables.Instance.TryGetValue(token, out returnValue);
+            }
+            if (!returnValue.HasValue)
+            {
                 double v = 0;
                 if (Double.TryParse(token, out v))
                 {
